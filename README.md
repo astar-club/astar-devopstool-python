@@ -1,3 +1,8 @@
 # astar-devopstool-python
 
-基于博客https://blog.csdn.net/qq_43057091/article/details/82179301修改的自动化运维脚本库
+
+
+
+### 参考资料
+[1] https://blog.csdn.net/qq_43057091/article/details/82179301
+[2] https://blog.csdn.net/qq_41841569/article/details/83824278
