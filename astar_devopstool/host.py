@@ -119,7 +119,8 @@ def get_cpu_status():
 
 
 def get_memory_status():
-    """内存信息
+    """\
+    内存信息
     :return 系统总计内存
     :return 系统已经使用内存
     :return 系统空闲内存

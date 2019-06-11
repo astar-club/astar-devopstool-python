@@ -11,7 +11,7 @@
 __author__ = 'A.Star'
 
 import configparser
-from astar_devopstool.email import *
+from astar_devopstool.emailtool import *
 
 cp = configparser.ConfigParser()
 cp.read('config.conf')
@@ -19,7 +19,7 @@ cp.read('config.conf')
 if __name__ == '__main__':
     email_user = cp.get('email', 'user')  # 发送者账号
     email_pwd = cp.get('email', 'password')  # 发送者密码,授权码
-    maillist = ['astar@snowland.ltd']
-    title = '这是一封来自雪域的测试邮件'
-    content = '测试邮件，请勿回复！'
+    maillist = ['cxl@86nsn.com', 'astar@snowland.ltd']
+    title = 'BUG'
+    content = '----测试----\n此邮件为自动发送，请勿回复！'
     send_mail(email_user, email_pwd, maillist, title, content)

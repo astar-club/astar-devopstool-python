@@ -9,4 +9,9 @@
 
 
 __author__ = 'A.Star'
-__version__ = '0.0.1'
+
+from astartool.setuptool import get_version
+
+version = (0, 0, 2, 'alpha', 0)
+__version__ = get_version(version)
+del get_version
