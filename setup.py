@@ -10,11 +10,9 @@
 
 __author__ = 'A.Star'
 
-
 from setuptools import setup, find_packages
 import astar_devopstool
 from astartool.setuptool import load_install_requires
-
 
 setup(
     name="astar-devopstool",
@@ -42,6 +40,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Topic :: Software Development :: Libraries'
     ],
     install_requires=load_install_requires(),

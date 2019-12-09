@@ -6,8 +6,17 @@
 # @file: ip.py
 # @time: 2019/6/4 9:49
 # @Software: PyCharm
+import getopt
+import os
+import re
+import socket
+import struct
+import sys
 
-
+try:
+    import fcntl
+except ImportError:
+    pass
 __author__ = 'A.Star'
 
 # coding:utf-8
@@ -25,15 +34,14 @@ __author__ = 'A.Star'
               07使用脚本和代理(ProxyAndPac)；09自动检测设置(D)；
               0B自动检测并使用代理(DIP)；0D自动检测并使用脚本(DS)；
 '''
-import os, sys, re, getopt
 
 
 def regIESettings(op, noLocal=False, ip='', pac='http://xduotai.com/pRsO3NGR3-.pac'):
-    '''
-      # 根据需求生成Windows代理设置注册表的.reg文件内容
-      # DefaultConnectionSettings项是二进制项
-      # 而具体这个二进制文件怎么解析，在收藏的PDF中有详细解释。
-    '''
+    """
+      根据需求生成Windows代理设置注册表的.reg文件内容
+      DefaultConnectionSettings项是二进制项
+      而具体这个二进制文件怎么解析，在收藏的PDF中有详细解释。
+    """
     if not op: return
     # 如果是设置IP代理的模式 则检查IP地址的有效性(允许为空，但不允许格式错误)
     if 'Proxy' in op and not ip == '':
@@ -52,8 +60,8 @@ def regIESettings(op, noLocal=False, ip='', pac='http://xduotai.com/pRsO3NGR3-.p
             return
         skipLocal = '07,00,00,00,%s' % __toHex('<local>') if noLocal else '00'
         reg_value = '46,00,00,00,00,00,00,00,%(switcher)s,00,00,00,%(ipLen)s,00,00,00,%(ip)s00,00,00,%(skipLocal)s,21,00,00,00%(pac)s' % (
-        {'switcher': switcher, 'ipLen': __toHex(len(ip)), 'ip': __toHex(ip) + ',' if ip else '',
-         'infoLen': __toHex(len('<local>')), 'skipLocal': skipLocal, 'pac': ',' + __toHex(pac) if pac else ''})
+            {'switcher': switcher, 'ipLen': __toHex(len(ip)), 'ip': __toHex(ip) + ',' if ip else '',
+             'infoLen': __toHex(len('<local>')), 'skipLocal': skipLocal, 'pac': ',' + __toHex(pac) if pac else ''})
     settings = 'Windows Registry Editor Version 5.00\n[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections]\n"DefaultConnectionSettings"=hex:%s' % reg_value
     # print 'Using proxy address: %s' % ip
     # print(op, ip, pac)
@@ -70,6 +78,31 @@ def regIESettings(op, noLocal=False, ip='', pac='http://xduotai.com/pRsO3NGR3-.p
     return
 
 
+def get_local_ip_by_socket():
+    """
+    获取本地IP(通过socket)
+    :return:
+    """
+    name = socket.getfqdn(socket.gethostname())
+    return socket.gethostbyname(name)
+
+
+
+
+def get_ip_address_by_fcntl(ifname='eth0'):
+    """
+    通过fcntl获取IP
+    :param ifname:
+    :return:
+    """
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    return socket.inet_ntoa(fcntl.ioctl(
+        s.fileno(),
+        0x8915,  # SIOCGIFADDR
+        struct.pack('256s', ifname[:15])
+    )[20:24])
+
+
 def __toHex(obj):
     if obj == '':
         return ''
@@ -81,6 +114,7 @@ def __toHex(obj):
     elif isinstance(obj, int):
         num = str(hex(obj)).replace('0x', '')
         return num if len(num) > 1 else '0' + num  # 如果是一位数则自动补上0，7为07，e为0e
+
 
 
 if __name__ == '__main__':

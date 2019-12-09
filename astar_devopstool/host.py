@@ -10,12 +10,11 @@
 
 __author__ = 'A.Star'
 
-import time
-import os
 import os
 import sys
-import pycurl
+
 import psutil
+import pycurl
 
 
 def get_dist_status():
