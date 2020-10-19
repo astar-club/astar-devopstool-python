@@ -14,5 +14,5 @@ from astar_devopstool.host import *
 
 
 if __name__ == '__main__':
-    code = get_web_status('www.astar.ltd:10010')
+    code = get_web_status('47.89.36.21')
     print(get_web_status_report(*code))

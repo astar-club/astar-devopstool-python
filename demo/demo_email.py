@@ -19,7 +19,7 @@ cp.read('config.conf')
 if __name__ == '__main__':
     email_user = cp.get('email', 'user')  # 发送者账号
     email_pwd = cp.get('email', 'password')  # 发送者密码,授权码
-    maillist = ['cxl@86nsn.com', 'astar@snowland.ltd']
+    maillist = ['gregor@snowland.ltd', 'astar@snowland.ltd', '1274031942@qq.com']
     title = 'BUG'
-    content = '----测试----\n此邮件为自动发送，请勿回复！'
+    content = '----测试----\n此邮件为自动发送，请勿回复！<h1>测试富文本H1</h1>'
     send_mail(email_user, email_pwd, maillist, title, content)

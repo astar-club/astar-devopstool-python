@@ -87,8 +87,6 @@ def get_local_ip_by_socket():
     return socket.gethostbyname(name)
 
 
-
-
 def get_ip_address_by_fcntl(ifname='eth0'):
     """
     通过fcntl获取IP
@@ -114,7 +112,6 @@ def __toHex(obj):
     elif isinstance(obj, int):
         num = str(hex(obj)).replace('0x', '')
         return num if len(num) > 1 else '0' + num  # 如果是一位数则自动补上0，7为07，e为0e
-
 
 
 if __name__ == '__main__':

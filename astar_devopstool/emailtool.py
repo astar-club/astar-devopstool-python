@@ -12,6 +12,8 @@ __author__ = 'A.Star'
 
 import smtplib
 from email.mime.text import MIMEText
+from astartool.string import is_email
+from astar_devopstool.exception import EmailError
 
 
 def send_mail(username, passwd, recv, title, content, mail_host='smtp.ym.163.com', port=25):
@@ -26,7 +28,10 @@ def send_mail(username, passwd, recv, title, content, mail_host='smtp.ym.163.com
     :param content: 邮件内容
     :return:
     """
-    if isinstance(recv, list):
+    if not isinstance(recv, (str, bytes)):
+        for each in recv:
+            if not is_email(each):
+                raise EmailError('Email Error!')
         recv = ','.join(recv)
     msg = MIMEText(content)  # 邮件内容
     msg['Subject'] = title  # 邮件主题

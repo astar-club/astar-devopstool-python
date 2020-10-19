@@ -14,7 +14,12 @@ import os
 import sys
 
 import psutil
-import pycurl
+try:
+    import pycurl
+
+    pycurl_import_flag = True
+except:
+    pycurl_import_flag = False
 
 
 def get_dist_status():
@@ -36,6 +41,8 @@ def get_web_status(URL="www.snowland.ltd"):
     :param 探测目标URL
 
     """
+    if not pycurl_import_flag:
+        raise ImportError('please install pycurl')
     # 创建一个Curl对象
     c = pycurl.Curl()
     # 定义请求的URL变量
@@ -63,7 +70,7 @@ def get_web_status(URL="www.snowland.ltd"):
     # 捕捉Curl.perform请求的提交，如果错误直接报错退出
     try:
         c.perform()
-    except Exception as e:
+    except ConnectionError as e:
         print("连接错误")
         indexfile.close()
         c.close()

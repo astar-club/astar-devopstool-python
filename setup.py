@@ -10,9 +10,9 @@
 
 __author__ = 'A.Star'
 
-from setuptools import setup, find_packages
+from setuptools import find_packages
 import astar_devopstool
-from astartool.setuptool import load_install_requires
+from astartool.setuptool import load_install_requires, setup, read_file
 
 setup(
     name="astar-devopstool",
@@ -20,7 +20,7 @@ setup(
     description=(
         'Python devopstool'
     ),
-    long_description=open('description.rst').read(),
+    long_description=read_file('description.rst'),
     author='A.Star',
     author_email='astar@snowland.ltd',
     maintainer='A.Star',
@@ -28,7 +28,7 @@ setup(
     license='Apache v2.0 License',
     packages=find_packages(),
     platforms=["all"],
-    url='http://182.61.50.242:10010/thirdparty/astar-devopstool-python',
+    url='https://github.com/astar-club/astar-devopstool-python',
     classifiers=[
         'Operating System :: OS Independent',
         'Intended Audience :: Developers',
@@ -44,4 +44,5 @@ setup(
         'Topic :: Software Development :: Libraries'
     ],
     install_requires=load_install_requires(),
+
 )
