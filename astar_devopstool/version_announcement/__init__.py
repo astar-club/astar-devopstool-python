@@ -3,8 +3,9 @@
 # @Author: 深圳星河软通科技有限公司 A.Star
 # @contact: astar@snowland.ltd
 # @site: www.astar.ltd
-# @file: win32helper .py
-# @time: 2020/9/22 5:11
+# @file: __init__.py .py
+# @time: 2020/12/4 14:44
 # @Software: PyCharm
 
-# todo
+from astar_devopstool.version_announcement._version import *
+from astar_devopstool.version_announcement._report import *

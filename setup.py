@@ -12,7 +12,9 @@ __author__ = 'A.Star'
 
 from setuptools import find_packages
 import astar_devopstool
-from astartool.setuptool import load_install_requires, setup, read_file
+from astartool.setuptool import load_install_requires, setup
+
+
 
 setup(
     name="astar-devopstool",
@@ -20,7 +22,7 @@ setup(
     description=(
         'Python devopstool'
     ),
-    long_description=read_file('description.rst'),
+    long_description=open('README.md', encoding='utf-8').read(),
     author='A.Star',
     author_email='astar@snowland.ltd',
     maintainer='A.Star',

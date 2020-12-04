@@ -107,7 +107,7 @@ def __toHex(obj):
     elif obj == 0 or obj == '0' or obj == '00':
         return '00'
     if isinstance(obj, str):
-        rehex = [str(hex(ord(s))).replace('0x', '') for s in obj]
+        rehex = (str(hex(ord(s))).replace('0x', '') for s in obj)
         return ','.join(rehex)
     elif isinstance(obj, int):
         num = str(hex(obj)).replace('0x', '')
@@ -116,7 +116,7 @@ def __toHex(obj):
 
 if __name__ == '__main__':
     # 获取文件外部参数
-    # 用法：在命令行中输入setRegProxy.py -o "ProxyOnly" -l --proxy"0.0.0.0:80" -l
+    # 用法：在命令行中输入./ip.py -o "ProxyOnly" -l --proxy"0.0.0.0:80" -l
     opts, args = getopt.getopt(sys.argv[1:], 'o:p:a:l', ['option=', 'proxy=', 'pac=', 'local'])
     # print(opts, args)  # 调试用
     if len(opts) > 0:

@@ -10,10 +10,16 @@
 
 __author__ = 'A.Star'
 
-import paramiko
 import ftplib
-import socket
 import os
+import socket
+
+try:
+    import paramiko
+    paramiko_flag = True
+except:
+    paramiko_flag = False
+
 from astar_devopstool.common import FTPCode
 
 

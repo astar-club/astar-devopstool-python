@@ -15,3 +15,6 @@
 [1] https://blog.csdn.net/qq_43057091/article/details/82179301
 
 [2] https://blog.csdn.net/qq_41841569/article/details/83824278
+
+[3] ftp自动下载、自动上传脚本，可以递归目录操作 http://blog.csdn.net/ouyang_peng/article/details/79271113
+

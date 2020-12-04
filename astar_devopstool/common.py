@@ -16,3 +16,4 @@ class FTPCode(Enum):
     LOGIN_ERROR = 2
     CANNOT_FOUND_CD = 3
     FILE_CANNOT_READ = 4
+
