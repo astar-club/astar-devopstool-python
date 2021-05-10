@@ -144,3 +144,10 @@ def get_net_io_conters(pernic=True):
     """得到网络信息"""
     return psutil.net_io_counters(pernic=pernic)
 
+
+def get_mac_address():
+    """获取mac地址"""
+    import uuid
+    node = uuid.getnode()
+    mac = uuid.UUID(int=node).hex[-12:]
+    return mac
