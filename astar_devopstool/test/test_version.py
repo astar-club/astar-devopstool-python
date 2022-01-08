@@ -11,7 +11,10 @@ from unittest import TestCase
 from astartool.project._decorators import std_logging
 from astar_devopstool.version_announcement._report import generate_readme_template
 import os
+
 osp = os.path
+
+
 class TestVersion(TestCase):
     @std_logging()
     def setUp(self):
@@ -20,7 +23,6 @@ class TestVersion(TestCase):
     @std_logging()
     def tearDown(self):
         pass
-
 
     def test_docs(self):
         """

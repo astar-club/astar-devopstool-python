@@ -1,3 +1,4 @@
 paramiko>=2.4.2
-astartool>=0.0.5
+astartool>=0.0.8
 psutil
+python-gitlab

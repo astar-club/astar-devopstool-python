@@ -22,7 +22,7 @@ setup(
     description=(
         'Python devopstool'
     ),
-    long_description=open('README.md', encoding='utf-8').read(),
+    long_description=open('README.rst', encoding='utf-8').read(),
     author='A.Star',
     author_email='astar@snowland.ltd',
     maintainer='A.Star',
@@ -43,6 +43,7 @@ setup(
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Topic :: Software Development :: Libraries'
     ],
     install_requires=load_install_requires(),
