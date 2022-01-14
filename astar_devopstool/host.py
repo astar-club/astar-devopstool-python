@@ -12,6 +12,7 @@ __author__ = 'A.Star'
 
 import os
 import sys
+import GPUtil
 
 import psutil
 try:

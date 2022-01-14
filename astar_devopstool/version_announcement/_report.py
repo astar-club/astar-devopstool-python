@@ -10,6 +10,7 @@
 
 from astartool.project import auto_title
 
+
 def version_release_announcement_template(
         data_dict: dict,
         print_file=True,

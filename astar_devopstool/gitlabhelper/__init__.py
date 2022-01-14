@@ -6,3 +6,5 @@
 # @file: __init__.py
 # @time: 2022/01/04 15:15
 # @Software: PyCharm
+
+from astar_devopstool.gitlabhelper._gitlabhelper import Gitlab
