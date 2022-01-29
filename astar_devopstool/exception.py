@@ -8,6 +8,6 @@
 # @Software: PyCharm
 
 
-class EmailError(BaseException):
+class EmailError(ValueError):
     def __init__(self, *args, **kwargs):
-        super(BaseException, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
