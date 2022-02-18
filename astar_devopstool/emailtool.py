@@ -46,19 +46,35 @@ def send_mail(username, passwd, recv, title, content, mail_host='smtp.ym.163.com
         for each in recv:
             if not is_email(each):
                 raise EmailError('邮件接受者格式错误')
-        recv = ','.join(recv)
+        recv_str = ','.join(recv)
+    else:
+        recv_str = recv
+        if ',' in recv:
+            recv = recv.split(',')
+        elif ';' in recv:
+            recv = recv.split(';')
+        else:
+            recv = [recv]
+    msg = MIMEMultipart()  # 邮件内容
+    msg['Subject'] = title  # 邮件主题
+    msg['From'] = username  # 发送者账号
+    msg['To'] = recv_str  # 接收者账号列表
     if cc is not None:
         if not isinstance(cc, (str, bytes)):
             for each in cc:
                 if not is_email(each):
                     raise EmailError('邮件抄送者格式错误')
-            cc = ','.join(cc)
-    msg = MIMEMultipart()  # 邮件内容
-    msg['Subject'] = title  # 邮件主题
-    msg['From'] = username  # 发送者账号
-    msg['To'] = recv  # 接收者账号列表
-    if cc is not None:
-        msg['Cc'] = cc
+            cc_str = ','.join(cc)
+
+        else:
+            cc_str = cc
+            if ',' in recv:
+                cc = cc.split(',')
+            elif ';' in recv:
+                cc = cc.split(';')
+            else:
+                cc = [cc]
+        msg['Cc'] = cc_str
     smtp = smtplib.SMTP(mail_host, port=port)  # 连接邮箱，传入邮箱地址，和端口号，smtp的端口号是25
     smtp.login(username, passwd)  # 登录发送者的邮箱账号，密码
     # 参数分别是 发送者，接收者，第三个是把上面的发送邮件的 内容变成字符串
@@ -81,6 +97,11 @@ def send_mail(username, passwd, recv, title, content, mail_host='smtp.ym.163.com
             msg.attach(att)
         else:
             warnings.warn("没有对应的附件格式或者附件格式不正确")
-    smtp.sendmail(username, recv, msg.as_string())
+    if cc:
+        email_list = recv + cc
+    else:
+        email_list = recv
+    for each in email_list:
+        smtp.sendmail(username, each, msg.as_string())
     smtp.quit()  # 发送完毕后退出smtp
 
