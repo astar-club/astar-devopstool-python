@@ -55,7 +55,7 @@ class FTPTool:
         self.host = host
         self.port = port
         self.ftp = FTP(host=host, user=user, passwd=passwd, acct=acct,
-                 timeout=timeout, source_address=None)
+                       timeout=timeout, source_address=None)
         # 重新设置下编码方式
         self.ftp.encoding = encoding
         self.log_flag = log_flag
@@ -119,7 +119,6 @@ class FTPTool:
         self.debug_print('local_file_size:%d  , remote_file_size:%d' % (local_file_size, remote_file_size))
         return remote_file_size == local_file_size
 
-
     def download_file(self, local_file, remote_file):
         """从ftp下载文件
             参数:
@@ -169,7 +168,7 @@ class FTPTool:
 
         remote_names = self.file_list
         self.debug_print('远程目录 列表: %s' % remote_names)
-        for file_type, file_name  in remote_names:
+        for file_type, file_name in remote_names:
 
             local = os.path.join(local_path, file_name)
             if file_type == 'd':
@@ -287,5 +286,3 @@ class FTPTool:
             pos += 1
         file_arr = [line[0], line[pos:]]
         return file_arr
-
-

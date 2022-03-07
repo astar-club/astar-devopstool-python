@@ -5,6 +5,7 @@
 [![github](https://img.shields.io/github/stars/astar-club/astar-devopstool-python)](https://img.shields.io/github/stars/astar-club/astar-devopstool-python)
 [![download](https://img.shields.io/pypi/dm/astar-devopstool.svg)](https://pypi.org/project/astar-devopstool)
 [![wheel](https://img.shields.io/pypi/wheel/astar-devopstool.svg)](https://pypi.python.org/pypi/astar-devopstool)
+![licence](https://img.shields.io/pypi/l/astar-devopstool.svg)
 ![status](https://img.shields.io/pypi/status/astar-devopstool.svg)
 
 

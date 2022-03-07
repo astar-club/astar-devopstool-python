@@ -1,5 +1,5 @@
 paramiko>=2.4.2
-astartool>=0.0.8
+astartool>=0.0.9
 psutil
-python-gitlab>=3.0.0
+python-gitlab>=2.0.0
 GPUtil

@@ -19,7 +19,6 @@ except ImportError:
     pass
 __author__ = 'A.Star'
 
-# coding:utf-8
 '''
   # Title   : setRegProxy
   # Author  : Solomon Xie

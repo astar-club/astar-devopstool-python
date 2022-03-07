@@ -100,3 +100,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 demo/*.conf
+.idea/

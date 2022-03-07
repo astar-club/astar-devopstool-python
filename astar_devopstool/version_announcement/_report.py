@@ -100,6 +100,7 @@ def generate_readme_template_md(
 [![version](https://img.shields.io/pypi/v/{pypi_name}.svg)](https://pypi.python.org/pypi/{pypi_name})
 {gitee_stars}{github_stars}[![download](https://img.shields.io/pypi/dm/{pypi_name}.svg)](https://pypi.org/project/{pypi_name})
 [![wheel](https://img.shields.io/pypi/wheel/{pypi_name}.svg)](https://pypi.python.org/pypi/{pypi_name})
+![licence](https://img.shields.io/pypi/l/{pypi_name}.svg)
 ![status](https://img.shields.io/pypi/status/{pypi_name}.svg)
 
 
@@ -190,7 +191,7 @@ def generate_readme_template_rst(
 
 |version| """.format(project_name=project_name, line='=' * 2 * len(project_name))\
            + ("|gitee| " if gitee else '') + ("|github| " if github else "") + \
-"""|download| |wheel| |status|
+"""|download| |wheel| |license| |status|
 
 
 
@@ -208,6 +209,7 @@ def generate_readme_template_rst(
    :target: https://pypi.org/project/{pypi_name}
 .. |wheel| image:: https://img.shields.io/pypi/wheel/{pypi_name}.svg
    :target: https://pypi.python.org/pypi/{pypi_name}
+.. |license| image:: https://img.shields.io/pypi/l/{pypi_name}.svg
 .. |status| image:: https://img.shields.io/pypi/status/{pypi_name}.svg
 
     """.format(project_name=project_name,

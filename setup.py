@@ -14,8 +14,6 @@ from setuptools import find_packages
 import astar_devopstool
 from astartool.setuptool import load_install_requires, setup
 
-
-
 setup(
     name="astar-devopstool",
     version=astar_devopstool.__version__,
@@ -44,6 +42,7 @@ setup(
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
         'Topic :: Software Development :: Libraries'
     ],
     install_requires=load_install_requires(),
