@@ -9,12 +9,16 @@
 
 
 from astartool.project import auto_title
+from astartool.error import ParameterValueError
+from astar_devopstool.version_announcement import get_version
 
 
 def version_release_announcement_template(
         data_dict: dict,
         print_file=True,
         file_name=None,
+        title=None,
+        content='',
         *, encoding='utf-8'
 ) -> str:
     """
@@ -25,13 +29,38 @@ def version_release_announcement_template(
     :param encoding:
     :return:
     """
-    s = ["|" + str(k) + "|" + str(v) + "|" for k, v in data_dict]
+    if title:
+        pass
+    else:
+        if 'project_name' not in data_dict:
+            raise ParameterValueError("data_dict 必须有 `project_name`为名的键")
+        else:
+            project_name = data_dict.pop('project_name')
+        if 'version' not in data_dict:
+            raise ParameterValueError("data_dict 必须有 `version`为名的键")
+        else:
+            version = data_dict.pop('version')
+            if isinstance(version, (tuple, list)):
+                version = get_version(version)
+        title = "{}-{}已发布！".format(project_name, version)
+
+    if content:
+        pass
+    else:
+        if 'content' not in data_dict:
+            raise ParameterValueError("data_dict 必须有 `content`为名的键")
+        else:
+            content = data_dict.pop('content')
+
+    s = ["|" + str(k) + "|" + str(v) + "|" for k, v in data_dict.items()]
     docs = '|信息|值|\n' + \
            '|:--:|:--:|\n' + \
            "\n".join(s)
 
+    docs += '\n\n## 更新内容\n\n{}\n'.format(content)
+
     if print_file:
-        auto_title(file_name, encoding=encoding)
+        auto_title(file_name, title=title, encoding=encoding)
         with open(file_name, "a+", encoding=encoding) as f:
             f.write(docs)
     return docs
@@ -178,7 +207,7 @@ def generate_readme_template_rst(
         github_stars = "\n.. |github| image:: https://img.shields.io/github/stars/{user_name}/{github_name}\n" \
                        "   :target: https://img.shields.io/github/stars/{user_name}/{github_name})".format(
             user_name=user_name, github_name=github_name)
-        github=True
+        github = True
     elif github:
         github_stars = "\n.. |github| image:: https://img.shields.io/github/stars/{user_name}/{github_name}\n" \
                        "   :target: https://img.shields.io/github/stars/{user_name}/{github_name})".format(
@@ -189,30 +218,30 @@ def generate_readme_template_rst(
     docs = """{project_name}
 {line}
 
-|version| """.format(project_name=project_name, line='=' * 2 * len(project_name))\
+|version| """.format(project_name=project_name, line='=' * 2 * len(project_name)) \
            + ("|gitee| " if gitee else '') + ("|github| " if github else "") + \
-"""|download| |wheel| |license| |status|
-
-
-
-
-参考资料
-~~~~~~~~
-
-[1] https://github.com/ASTARCHEN/astartool
-
-[2] https://github.com/astar-club/astar-devopstool-python
-
-.. |version| image:: https://img.shields.io/pypi/v/{pypi_name}.svg
-   :target: https://pypi.python.org/pypi/{pypi_name}{gitee_stars}{github_stars}
-.. |download| image:: https://img.shields.io/pypi/dm/{pypi_name}.svg
-   :target: https://pypi.org/project/{pypi_name}
-.. |wheel| image:: https://img.shields.io/pypi/wheel/{pypi_name}.svg
-   :target: https://pypi.python.org/pypi/{pypi_name}
-.. |license| image:: https://img.shields.io/pypi/l/{pypi_name}.svg
-.. |status| image:: https://img.shields.io/pypi/status/{pypi_name}.svg
-
-    """.format(project_name=project_name,
+           """|download| |wheel| |license| |status|
+           
+           
+           
+           
+           参考资料
+           ~~~~~~~~
+           
+           [1] https://github.com/ASTARCHEN/astartool
+           
+           [2] https://github.com/astar-club/astar-devopstool-python
+           
+           .. |version| image:: https://img.shields.io/pypi/v/{pypi_name}.svg
+              :target: https://pypi.python.org/pypi/{pypi_name}{gitee_stars}{github_stars}
+           .. |download| image:: https://img.shields.io/pypi/dm/{pypi_name}.svg
+              :target: https://pypi.org/project/{pypi_name}
+           .. |wheel| image:: https://img.shields.io/pypi/wheel/{pypi_name}.svg
+              :target: https://pypi.python.org/pypi/{pypi_name}
+           .. |license| image:: https://img.shields.io/pypi/l/{pypi_name}.svg
+           .. |status| image:: https://img.shields.io/pypi/status/{pypi_name}.svg
+           
+               """.format(project_name=project_name,
                line='=' * 2 * len(project_name),
                pypi_name=pypi_name,
                github_stars=github_stars,

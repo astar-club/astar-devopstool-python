@@ -12,6 +12,7 @@ __author__ = 'A.Star'
 
 from setuptools import find_packages
 import astar_devopstool
+from astar_devopstool.common import License, Plantform
 from astartool.setuptool import load_install_requires, setup
 
 setup(
@@ -27,12 +28,12 @@ setup(
     maintainer_email='astar@snowland.ltd',
     license='Apache v2.0 License',
     packages=find_packages(),
-    platforms=["all"],
+    platforms=[Plantform.ALL.value],
     url='https://github.com/astar-club/astar-devopstool-python',
     classifiers=[
         'Operating System :: OS Independent',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: BSD License',
+        License.BSD.value,
         'Programming Language :: Python',
         'Programming Language :: Python :: Implementation',
         'Programming Language :: Python :: 2',
