@@ -33,4 +33,4 @@ content = """
 
 """
 
-version_release_announcement_template(version_dict, content=content, file_name="../doc/version_release.md")
+version_release_announcement_template(version_dict, content=content, file_name="../doc/version_release/version_release_v0.0.7.md")

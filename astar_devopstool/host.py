@@ -39,7 +39,7 @@ def get_web_status(URL="www.snowland.ltd"):
     它可以通过调用pycurl提供的方法，来探测Web服务质量
     比如了解相应的HTTP状态码、请求延时、HTTP头信息、下载速度等
 
-    :param 探测目标URL
+    :param URL: 探测目标URL
 
     """
     if not pycurl_import_flag:
@@ -103,6 +103,19 @@ def get_web_status(URL="www.snowland.ltd"):
 
 def get_web_status_report(HTTP_CODE, NAMELOOKUP_TIME, CONNECT_TIME, PRETRANSFER_TIME, STARTTRANSFER_TIME, TOTAL_TIME,
                           SIZE_DOWNLOAD, HEADER_SIZE, SPEED_DOWNLOAD):
+    """
+
+    :param HTTP_CODE: HTTP状态码
+    :param NAMELOOKUP_TIME: DNS解析时间
+    :param CONNECT_TIME: 建立连接时间
+    :param PRETRANSFER_TIME: 准备传输时间
+    :param STARTTRANSFER_TIME: 传输开始时间
+    :param TOTAL_TIME: 传输结束总时间
+    :param SIZE_DOWNLOAD: 下载数据包大小
+    :param HEADER_SIZE: HTTP头大小
+    :param SPEED_DOWNLOAD: 下载速度
+    :return: 格式化的字符串
+    """
     return """\
     HTTP状态码：%d 
     DNS解析时间：%.2f ms 
@@ -119,19 +132,16 @@ def get_web_status_report(HTTP_CODE, NAMELOOKUP_TIME, CONNECT_TIME, PRETRANSFER_
 
 def get_cpu_status():
     """CPU信息
-    :return CPU逻辑数量,
-    :return CPU物理核心
-    :return CPU当前使用率"""
+    :return: CPU逻辑数量, CPU物理核心, CPU当前使用率
+    """
     return psutil.cpu_count(), psutil.cpu_count(logical=False), psutil.cpu_percent()  #
 
 
 def get_memory_status():
     """\
     内存信息
-    :return 系统总计内存
-    :return 系统已经使用内存
-    :return 系统空闲内存
-    :return swap内存信息"""
+    :return: 系统总计内存、 系统已经使用内存、 系统空闲内存、 swap内存信息
+    """
     mem = psutil.virtual_memory()  # 实例化内存对象
     return mem.total, mem.used, mem.free, psutil.swap_memory()
 
