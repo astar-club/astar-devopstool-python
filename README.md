@@ -1,7 +1,7 @@
 # astar-devopstool
 
 [![version](https://img.shields.io/pypi/v/astar-devopstool.svg)](https://pypi.python.org/pypi/astar-devopstool)
-[![gitee](https://gitee.com/hoops/snowland-img2cartoon/badge/star.svg)](https://gitee.com/snowlandltd/snowland-img2cartoon/stargazers)
+[![gitee](https://gitee.com/snowlandltd/astar-devopstool-python/badge/star.svg)](https://gitee.com/snowlandltd/astar-devopstool-python/stargazers)
 [![github](https://img.shields.io/github/stars/astar-club/astar-devopstool-python)](https://img.shields.io/github/stars/astar-club/astar-devopstool-python)
 [![download](https://img.shields.io/pypi/dm/astar-devopstool.svg)](https://pypi.org/project/astar-devopstool)
 [![wheel](https://img.shields.io/pypi/wheel/astar-devopstool.svg)](https://pypi.python.org/pypi/astar-devopstool)
