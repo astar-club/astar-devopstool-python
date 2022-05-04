@@ -24,9 +24,9 @@ def version_release_announcement_template(
     """
     发布通告模板
     :param data_dict:
-    :param print_file:
+    :param print_file: bool 是否输出为文件
     :param file_name:
-    :param encoding:
+    :param encoding: 文件编码格式
     :return:
     """
     if title:

@@ -13,6 +13,7 @@ import gitlab.v4.objects.branches
 from gitlab.v4.objects.commits import ProjectCommit
 from gitlab import Gitlab as PyGitlab
 from collections import Counter
+from astartool.error import ParameterTypeError, ParameterValueError
 
 
 class Gitlab(PyGitlab):
@@ -25,12 +26,12 @@ class Gitlab(PyGitlab):
                                branches=None):
         """
         统计提交
-        :param start_time:
-        :param print_file:
+        :param start_time: 统计的开始时间。可以是datetime格式，或者yyyy-mm-dd格式
+        :param print_file: 统计的结束时间。可以是datetime格式，或者yyyy-mm-dd格式
         :param file_name:
         :param encoding:
-        :param projects:
-        :param branches:
+        :param projects: projects对象，None或者字符串`all`, None或者`all`时统计所有的项目
+        :param branches: 带统计的分支对象，也可以是分支名
         :return:
         """
         if isinstance(start_time, (datetime.datetime, datetime.date)):
@@ -63,7 +64,7 @@ class Gitlab(PyGitlab):
                     query_parameters = {'since': start_time, 'until': end_time,
                                         'ref_name': branch}
                 else:
-                    raise ValueError('branch 参数错误')
+                    raise ParameterValueError('branch 参数错误')
                 commits = project.commits.list(all=True, query_parameters=query_parameters)
                 commits_set.update(commits)
             # 然后再遍历每个提交记录，查询每个提交记录的人和量

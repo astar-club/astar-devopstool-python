@@ -7,10 +7,12 @@
 # @time: 2020/12/4 15:15
 # @Software: PyCharm
 
-from unittest import TestCase
-from astartool.project._decorators import std_logging
-from astar_devopstool.version_announcement._report import generate_readme_template
 import os
+from unittest import TestCase
+
+from astartool.project import std_logging
+
+from astar_devopstool.version_announcement import generate_readme_template
 
 osp = os.path
 
