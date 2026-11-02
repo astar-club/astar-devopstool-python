@@ -8,16 +8,27 @@
 # @Software: PyCharm
 import datetime
 import re
-
-import gitlab.v4.objects.branches
-from gitlab.v4.objects.commits import ProjectCommit
-from gitlab import Gitlab as PyGitlab
 from collections import Counter
+
+try:
+    from gitlab import Gitlab as PyGitlab
+    import gitlab.v4.objects.branches
+    from gitlab.v4.objects.branches import ProjectBranch
+    from gitlab.v4.objects.commits import ProjectCommit
+    gitlab_flag = True
+except ImportError:
+    gitlab_flag = False
+    PyGitlab = object
 from astartool.error import ParameterTypeError, ParameterValueError
 
 
 class Gitlab(PyGitlab):
     def __init__(self, *args, **kwargs):
+        if not gitlab_flag:
+            raise ImportError(
+                'GitLab 功能依赖 python-gitlab，请安装可选依赖：'
+                'pip install astar-devopstool[gitlab]'
+            )
         super(Gitlab, self).__init__(*args, **kwargs)
 
     def statistical_submission(self, start_time: (str, datetime.datetime) = '2021-02-20',
@@ -78,5 +89,3 @@ class Gitlab(PyGitlab):
                 else:
                     result[author_name] = stats
         return result
-
-

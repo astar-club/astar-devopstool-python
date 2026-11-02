@@ -88,6 +88,10 @@ def sftp_put(file_from, file_to, host: str, port=22, username='root', password='
     :param password:
     :return:
     """
+    if not paramiko_flag:
+        raise ImportError(
+            'sftp 功能依赖 paramiko，请安装可选依赖：pip install astar-devopstool[ssh]'
+        )
     with paramiko.Transport((host, port)) as t:
         t.connect(username=username, password=password)
         sftp = paramiko.SFTPClient.from_transport(t)
@@ -105,6 +109,10 @@ def sftp_get(file_from, file_to, host: str, port=22, username='root', password='
     :param password:
     :return:
     """
+    if not paramiko_flag:
+        raise ImportError(
+            'sftp 功能依赖 paramiko，请安装可选依赖：pip install astar-devopstool[ssh]'
+        )
     with paramiko.Transport((host, port)) as t:
         t.connect(username=username, password=password)
         sftp = paramiko.SFTPClient.from_transport(t)
@@ -112,6 +120,10 @@ def sftp_get(file_from, file_to, host: str, port=22, username='root', password='
 
 
 def SSHClient(host, port=22, username='root', private_key_file=None):
+    if not paramiko_flag:
+        raise ImportError(
+            'SSH 功能依赖 paramiko，请安装可选依赖：pip install astar-devopstool[ssh]'
+        )
     private_key = paramiko.RSAKey.from_private_key_file(private_key_file)
     transport = paramiko.Transport((host, port))
     transport.connect(username=username, pkey=private_key)

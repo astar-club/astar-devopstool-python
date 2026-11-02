@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "astartool>=0.0.9"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "astar-devopstool"
+dynamic = ["version"]
+description = "Python devopstool"
+readme = "README.rst"
+requires-python = ">=3.6"
+license = "Apache-2.0"
+authors = [
+    {name = "A.Star", email = "astar@snowland.ltd"},
+]
+maintainers = [
+    {name = "A.Star", email = "astar@snowland.ltd"},
+]
+urls = {Homepage = "https://github.com/astar-club/astar-devopstool-python"}
+dependencies = [
+    "astartool>=0.0.9",
+]
+
+classifiers = [
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Software Development :: Libraries",
+]
+
+[project.optional-dependencies]
+ssh = ["paramiko>=2.4.2"]
+gitlab = ["python-gitlab>=2.0.0"]
+host = ["psutil"]
+all = [
+    "paramiko>=2.4.2",
+    "python-gitlab>=2.0.0",
+    "psutil",
+]
+
+[tool.setuptools]
+packages = {find = {exclude = ["tests", "tests.*"]}}
+
+[tool.setuptools.dynamic]
+version = {attr = "astar_devopstool.__version__"}

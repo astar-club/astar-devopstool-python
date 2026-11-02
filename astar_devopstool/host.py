@@ -12,9 +12,13 @@ __author__ = 'A.Star'
 
 import os
 import sys
-import GPUtil
 
-import psutil
+try:
+    import psutil
+    psutil_flag = True
+except ImportError:
+    psutil_flag = False
+
 try:
     import pycurl
 
@@ -134,6 +138,10 @@ def get_cpu_status():
     """CPU信息
     :return: CPU逻辑数量, CPU物理核心, CPU当前使用率
     """
+    if not psutil_flag:
+        raise ImportError(
+            '主机监控功能依赖 psutil，请安装可选依赖：pip install astar-devopstool[host]'
+        )
     return psutil.cpu_count(), psutil.cpu_count(logical=False), psutil.cpu_percent()  #
 
 
@@ -142,17 +150,29 @@ def get_memory_status():
     内存信息
     :return: 系统总计内存、 系统已经使用内存、 系统空闲内存、 swap内存信息
     """
+    if not psutil_flag:
+        raise ImportError(
+            '主机监控功能依赖 psutil，请安装可选依赖：pip install astar-devopstool[host]'
+        )
     mem = psutil.virtual_memory()  # 实例化内存对象
     return mem.total, mem.used, mem.free, psutil.swap_memory()
 
 
 def get_dist_usage():
     """得到硬盘使用"""
+    if not psutil_flag:
+        raise ImportError(
+            '主机监控功能依赖 psutil，请安装可选依赖：pip install astar-devopstool[host]'
+        )
     return psutil.disk_usage('/')
 
 
 def get_net_io_conters(pernic=True):
     """得到网络信息"""
+    if not psutil_flag:
+        raise ImportError(
+            '主机监控功能依赖 psutil，请安装可选依赖：pip install astar-devopstool[host]'
+        )
     return psutil.net_io_counters(pernic=pernic)
 
 
