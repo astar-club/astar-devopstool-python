@@ -19,7 +19,7 @@ except ImportError:
     pass
 __author__ = 'A.Star'
 
-'''
+r'''
   # Title   : setRegProxy
   # Author  : Solomon Xie
   # Utility : Via Registry key of windows, change proxy settings of IE on Windows.
@@ -45,7 +45,7 @@ def regIESettings(op, noLocal=False, ip='', pac='http://xduotai.com/pRsO3NGR3-.p
     # 如果是设置IP代理的模式 则检查IP地址的有效性(允许为空，但不允许格式错误)
     if 'Proxy' in op and not ip == '':
         # if len(extractIp(ip))==0
-        if 1 > len(re.findall('([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})\s*:{0,1}\s*([0-9]{1,5}){0,1}', ip)):
+        if 1 > len(re.findall(r'([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})\s*:{0,1}\s*([0-9]{1,5}){0,1}', ip)):
             # print('---Unexpected IP Address:%s---' % ip)
             return
     options = {'On': '0F', 'Off': '01', 'ProxyOnly': '03', 'PacOnly': '05', 'ProxyAndPac': '07', 'D': '09', 'DIP': '0B',
@@ -61,13 +61,15 @@ def regIESettings(op, noLocal=False, ip='', pac='http://xduotai.com/pRsO3NGR3-.p
         reg_value = '46,00,00,00,00,00,00,00,%(switcher)s,00,00,00,%(ipLen)s,00,00,00,%(ip)s00,00,00,%(skipLocal)s,21,00,00,00%(pac)s' % (
             {'switcher': switcher, 'ipLen': __toHex(len(ip)), 'ip': __toHex(ip) + ',' if ip else '',
              'infoLen': __toHex(len('<local>')), 'skipLocal': skipLocal, 'pac': ',' + __toHex(pac) if pac else ''})
-    settings = 'Windows Registry Editor Version 5.00\n[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections]\n"DefaultConnectionSettings"=hex:%s' % reg_value
+    settings = 'Windows Registry Editor Version 5.00\n' + \
+               r'[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\Connections]' + \
+               '\n"DefaultConnectionSettings"=hex:%s' % reg_value
     # print 'Using proxy address: %s' % ip
     # print(op, ip, pac)
     # print(options[op] + '\n' + __toHex(ip) + '\n' + __toHex(pac))
     # print(settings)
     # === 生成reg文件并导入到注册表中 ===
-    filePath = '%s\DefaultConnectionSettings.reg' % os.getcwd()
+    filePath = os.path.join(os.getcwd(), 'DefaultConnectionSettings.reg')
     with open(filePath, 'w') as f:
         f.write(settings)
     cmd = 'reg import "%s"' % filePath
