@@ -1,11 +1,11 @@
-# 推送到主分支时运行测试并收集覆盖率，上传到 Codecov
+# 推送到 dev / main 分支时运行单元测试并收集覆盖率，上传到 Codecov
 # 与 astartool 的 codecov 工作流一致，但本项目使用 unittest + coverage（不使用 pytest）
 name: Codecov
 
 on:
   push:
     branches:
-      - 'master'
+      - 'dev'
       - 'main'
 
 jobs:

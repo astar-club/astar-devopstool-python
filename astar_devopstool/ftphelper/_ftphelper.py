@@ -47,11 +47,6 @@ class FTPTool:
 
         self.source_address = source_address
         self.timeout = timeout
-        if host:
-            self.ftp.connect(host)
-            if user:
-                self.login(user, passwd, acct)
-
         self.host = host
         self.port = port
         self.ftp = FTP(host=host, user=user, passwd=passwd, acct=acct,
@@ -59,11 +54,14 @@ class FTPTool:
         # 重新设置下编码方式
         self.ftp.encoding = encoding
         self.log_flag = log_flag
+        self.log_file = None
         if log_flag:
             if isinstance(log_file, (str, bytes)):
                 self.log_file = open(log_file, "a")
             else:
                 self.log_file = log_file
+        if host and user:
+            self.login(user, passwd, acct)
         self.file_list = []
 
     def login(self, username, password, acct=''):
@@ -262,7 +260,8 @@ class FTPTool:
         date_now = time.strftime('%Y-%m-%d', time_now)
         format_log_str = "%s ---> %s \n " % (date_now, log_str)
         print(format_log_str)
-        self.log_file.write(format_log_str)
+        if self.log_file is not None:
+            self.log_file.write(format_log_str)
 
     def get_file_list(self, line):
         """ 获取文件列表
