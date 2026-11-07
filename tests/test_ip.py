@@ -32,7 +32,8 @@ class TestIp(TestCase):
         self.assertIsNone(ip.regIESettings(''))
 
     def test_reg_iesettings_invalid_ip(self):
-        self.assertIsNone(ip.regIESettings('ProxyOnly', ip='999.999.999.999'))
+        # 3 段数字不符合 IPv4 格式，函数应早退返回 None，且不写文件
+        self.assertIsNone(ip.regIESettings('ProxyOnly', ip='999.999.999'))
 
     def test_reg_iesettings_off(self):
         m = mock.mock_open()

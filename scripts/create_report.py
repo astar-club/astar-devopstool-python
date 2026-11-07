@@ -15,6 +15,8 @@ version_dict = {
     '分类': "运维工具、工具包",
     '开源地址-gitee': '[https://gitee.com/snowlandltd/astar-devopstool-python]'
                   '(https://gitee.com/snowlandltd/astar-devopstool-python)',
+    '开源地址-github': '[https://github.com/astar-club/astar-devopstool-python]'
+                   '(https://github.com/astar-club/astar-devopstool-python)',
     '开源下载-pypi': '[https://pypi.org/project/astar-devopstool/]'
                  '(https://pypi.org/project/astar-devopstool/)'
 }

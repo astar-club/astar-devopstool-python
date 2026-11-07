@@ -9,8 +9,9 @@
   - 生成说明： [api/README.md](api/README.md)
   - v0.1： [api/v0.1/index.md](api/v0.1/index.md)
   - v0.0.7： [api/v0.0.7/index.md](api/v0.0.7/index.md)
-- 版本发布通告
-  - v0.1： [version_release/version_release_v0.1.md](version_release/version_release_v0.1.md)
+- 版本发布通告 / Release notes
+  - v0.1（中文）： [version_release/version_release_v0.1.md](version_release/version_release_v0.1.md)
+  - v0.1（English）： [version_release/version_release_v0.1.en.md](version_release/version_release_v0.1.en.md)
   - v0.0.7： [version_release/version_release_v0.0.7.md](version_release/version_release_v0.0.7.md)
 
 ## 文档结构 / Structure
@@ -26,7 +27,8 @@ doc/
 │   │   └── index.md
 │   └── v0.0.7/
 │       └── index.md
-└── version_release/         # 版本发布通告
+└── version_release/         # 版本发布通告 / release notes
     ├── version_release_v0.1.md
+    ├── version_release_v0.1.en.md
     └── version_release_v0.0.7.md
 ```

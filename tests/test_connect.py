@@ -51,8 +51,11 @@ class TestConnect(TestCase):
     @mock.patch('paramiko.RSAKey.from_private_key_file', return_value=mock.MagicMock())
     @mock.patch('paramiko.Transport', return_value=mock.MagicMock())
     def test_ssh_success(self, *_):
-        connect.SSHClient('host', private_key_file='key.pem')
         from paramiko import SSHClient
+        # exec_command 需要返回 3 元组 (stdin, stdout, stderr)
+        SSHClient.return_value.exec_command.return_value = (
+            mock.MagicMock(), mock.MagicMock(), mock.MagicMock())
+        connect.SSHClient('host', private_key_file='key.pem')
         SSHClient.return_value.exec_command.assert_called_once_with('df')
 
     @skipUnless(HAS_PARAMIKO, 'paramiko not installed')
